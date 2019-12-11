@@ -1,0 +1,35 @@
+using System;
+namespace palindromecheck {
+   class Program {
+    
+    // function to check the string is palindrome or not
+     public static bool CheckPalindrome(string text){
+      string reverse;
+      //converting string to char array
+      char[] ch = text.ToCharArray();
+       
+       // reverse the array
+        Array.Reverse(ch);
+        
+        //assign ch array to reverse string.
+         reverse = new string(ch);
+        
+        // comparing if both strings are equal or not ignoring the case of the letters
+         bool b = text.Equals(reverse, StringComparison.OrdinalIgnoreCase);
+         return b; 
+     }
+    
+       static void Main(string[] args) {
+
+         string input;
+         input=Console.ReadLine();
+         bool isPalindrome=CheckPalindrome(input);
+         if (isPalindrome) {
+            Console.WriteLine("" + input + " is a Palindrome!");
+         } else {
+            Console.WriteLine(" " + input + " is not a Palindrome!");
+         }
+         Console.Read();
+      }
+   }
+}
