@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using System.Text.RegularExpressions;
 namespace palindromecheck {
    class Program {
 
@@ -27,6 +29,42 @@ namespace palindromecheck {
       }
 
 
+
+       // check email is valid or not
+     /* public static bool IsValid(string emailaddress)
+      {
+        try
+        {
+          MailAddress m = new MailAddress(emailaddress);
+          return true;
+        }
+        catch (FormatException)
+        {
+         return false;
+        }
+      }*/
+
+
+    public static void ExtractEmails(string data)
+    {
+        //string data = File.ReadAllText(inFilePath); //read File 
+        //instantiate with this pattern 
+        Regex emailRegex = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*",
+            RegexOptions.IgnoreCase);
+        //find items that matches with our pattern
+        MatchCollection emailMatches = emailRegex.Matches(data);
+
+        StringBuilder sb = new StringBuilder();
+
+        foreach (Match emailMatch in emailMatches)
+        {
+            sb.AppendLine(emailMatch.Value);
+        }
+        
+        Console.WriteLine("Number of Matcher {0}",emailMatches.Count);
+    }
+
+
       static void Main(string[] args) {
         // test for palindrome 
        /*  string input;
@@ -40,8 +78,15 @@ namespace palindromecheck {
          /*********end of testing palindrome********* */
          
          // check multiples fuction
-         CheckMulitple();
+        // CheckMulitple();
          /* end of testing multiples*****/
+         
+         
+         // check valid emails in string
+
+            string t="yasir is a boy email is geniusyasee@hotmail.com but badar is also good boy badar@hotmail.com and zakir is also good bou but email is 123+@baks.comment";
+             ExtractEmails(t);
+         /**** End of testing valid emails******/
          Console.Read();
       }
    }
